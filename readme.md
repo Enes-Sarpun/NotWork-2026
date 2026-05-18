@@ -12,7 +12,7 @@ Platform, kullanıcıların harcama alışkanlıklarını, kişilik özellikleri
 
 Günümüzde kullanıcılar, e-ticaret sitelerinin teşvik edici yapısı nedeniyle genellikle bütçelerini aşmakta ve ihtiyaç dışı harcamalar yapmaktadır. FinShop AI bu problemi çözmek için:
 - Kullanıcının bütçesini ve harcama alışkanlıklarını analiz eder.
-- Özel bir "Kişilik Testi" (Onboarding) ile kullanıcının harcama profilini (savruk, dengeli, tutumlu vb.) çıkarır.
+- Özel bir "Kişilik Testi" ile kullanıcının harcama profilini (savruk, dengeli, tutumlu vb.) çıkarır.
 - Gelişmiş AI ajanları sayesinde kullanıcıyla doğal bir sohbet yürütür ve ona özel, fiyat-performans odaklı ürün önerileri sunar.
 
 ---
@@ -29,7 +29,7 @@ Sistemin kalbinde, **LangChain** ve **LangGraph** ile orkestre edilen, Google Ge
 - 💰 **Budget Agent:** Kullanıcının finansal durumunu takip eder ve ürün önerilerinin bütçe sınırları içinde kalmasını sağlar.
 - 🎯 **Recommendation Agent:** Arama sonuçlarını, bütçe kısıtlarını ve kullanıcı profilini harmanlayarak en ideal ürünleri belirler.
 - ⚖️ **Review Agent:** Önerilecek ürünlerin kalitesini, kullanıcı yorumlarını ve fiyat-performans oranını değerlendirir.
-- ⭐ **Watchlist Agent:** Kullanıcının ilgilendiği veya favoriye aldığı ürünleri ("Starred Products") yönetir.
+- ⭐ **Watchlist Agent:** Kullanıcının ilgilendiği veya favoriye aldığı ürünleri yönetir.
 - 🎼 **Orchestrator:** Tüm bu ajanlar arasındaki veri akışını, karar mekanizmalarını ve görev sıralamasını yöneten ana kontrolcüdür.
 
 ---
@@ -127,6 +127,8 @@ pip install -r requirements.txt
 # SUPABASE_URL=...
 # SUPABASE_KEY=...
 # JWT_SECRET_KEY=...
+# MANUS_API_KEY=...
+# SERPAPI_KEY=...
 
 # Sunucuyu başlatın
 uvicorn app.main:app --reload
@@ -155,23 +157,27 @@ Frontend uygulaması `http://localhost:3000` adresinde çalışacaktır.
 
 ## 📸 Proje Görselleri ve Çalışma Zamanı (Runtime) Akışları
 
-Projenin temel modüllerinin, arayüz etkileşimlerinin ve yapay zeka ajan entegrasyonlarının canlı çalışma akışları aşağıda simüle edilmiştir:
+Projenin temel modüllerinin, kullanıcı arayüzü etkileşimlerinin ve yapay zeka ajan entegrasyonlarının canlı çalışma akışları aşağıda detaylandırılmıştır:
 
-### 🔐 1. Karşılama (Landing) ve Güvenli Giriş Akışı
-Kullanıcıyı karşılayan modern arayüz tasarımı ve Supabase üzerinden JWT tabanlı güvenli kimlik doğrulama (Authentication) ile hesap oluşturma / sisteme giriş süreçleri.
+### 🌐 1. Platform Vizyonu ve "Nasıl Çalışır?" Akışı
+Kullanıcıyı karşılayan modern, animasyonlu Landing Page arayüzü. Bu akışta platformun temel felsefesi, sunduğu çözümler, projenin işleyiş adımları ve kullanıcıyı finansal farkındalığa hazırlayan ilk etkileşim katmanı gösterilmektedir.
 
-![FinShop AI](Images/finshop1.gif)
+![FinShop AI Landing Flow](Images/finshop4.gif)
 
-### 📊 2. Dinamik Dashboard ve Finansal Profil Analizi
-Sisteme giriş yapıldıktan sonra Next.js dashboard'un asenkron olarak yüklenme anı. Kullanıcının güncel bütçe kartları, harcama limitleri, "Tutumlu Harcayıcı" gibi yapay zeka tarafından belirlenen finansal profil analizi ve proaktif tasarruf önerilerinin listelenmesi.
+### 🔐 2. Güvenli Kimlik Doğrulama ve Kayıt Akışı
+Supabase altyapısı kullanılarak tasarlanan, JWT (JSON Web Token) tabanlı güvenli kimlik doğrulama (Authentication) mimarisi. Kullanıcının sisteme ilk defa kayıt olma ve güvenli oturum açma süreçlerinin arayüz simülasyonu.
 
-![FinShop AI Dashboard](Images/finshop2.gif)
+![FinShop AI Auth Flow](Images/finshop1.gif)
 
-### 🤖 3. Agentic AI (Çoklu Ajan) ve Akıllı Alışveriş Sohbeti
+### 📊 3. Dinamik Dashboard ve Proaktif Bütçe Analizi
+Sisteme giriş yapıldıktan sonra Next.js dashboard'un asenkron olarak yüklenme anı. Kullanıcının Supabase'den çekilen anlık bütçe kartları, harcama limitleri, "Tutumlu Harcayıcı" gibi yapay zeka tarafından analiz edilen finansal profili ve proaktif tasarruf önerilerinin listelenmesi.
+
+![FinShop AI Dashboard Analysis](Images/finshop2.gif)
+
+### 🤖 4. Çoklu Ajan (Multi-Agent) Sistemi ve Akıllı Alışveriş Sohbeti
 Kullanıcının bütçesine göre akıllı telefon ve kılıf arama senaryosu. Girdinin `SecurityAgent` filtresinden geçerek `ConversationAgent` vasıtasıyla anlamlandırılması, bütçe limitlerine göre saniyeler içinde fiyat-performans ve muadil ürün kartlarının dinamik olarak ekrana basılması süreci. Sonrasında "Yıldızlı Ürünler" (Takip Listesi) modülünün çalışma akışı.
 
 ![FinShop AI Agent Chat](Images/finshop3.gif)
-
 
 
 
